@@ -1,15 +1,13 @@
-#include<stdio.h>
-#include<stdlib.h> 
+#include <iostream>
+#include <cstdlib> // For standard C library functions
 
 __global__ void print_from_gpu(void) {
-	printf("Hello World! from thread [%d,%d] \
-		From device\n", threadIdx.x,blockIdx.x); 
+    printf("Hello World! from thread [%d,%d] From device\n", threadIdx.x, blockIdx.x); 
 }
 
 int main(void) { 
-	printf("Hello World from host!\n"); 
-	print_from_gpu<<<1,1>>>();
-	cudaDeviceSynchronize();
-return 0; 
+    std::cout << "Hello World from host!\n"; 
+    print_from_gpu<<<10,10>>>();
+    cudaDeviceSynchronize();
+    return 0; 
 }
-
